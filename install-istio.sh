@@ -5,7 +5,6 @@ source ./vars.sh
 if [ -d istio ]; then
   cd istio
 else
-  cd istio
   git clone git@github.com:istio/istio.git
   cd istio
   git checkout release-1.1
@@ -32,6 +31,7 @@ data:
   stubDomains: |
     {"global": ["$(kubectl get svc -n istio-system istiocoredns -o jsonpath={.spec.clusterIP})"]}
 EOF
+kubectl label namespace default istio-injection=enabled --overwrite
 
 kubectl config use-context $context2
 kubectl create ns istio-system
@@ -51,3 +51,4 @@ data:
   stubDomains: |
     {"global": ["$(kubectl get svc -n istio-system istiocoredns -o jsonpath={.spec.clusterIP})"]}
 EOF
+kubectl label namespace default istio-injection=enabled --overwrite
