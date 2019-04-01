@@ -1,0 +1,35 @@
+diff --git a/deploy/kubernetes/complete-demo.yaml b/deploy/kubernetes/complete-demo.yaml
+index a11f99b..624377c 100644
+--- a/deploy/kubernetes/complete-demo.yaml
++++ b/deploy/kubernetes/complete-demo.yaml
+@@ -242,7 +242,7 @@ spec:
+   ports:
+   - port: 80
+     targetPort: 8079
+-    nodePort: 30001
++    nodePort: 30002
+   selector:
+     name: front-end
+ ---
+@@ -486,7 +486,21 @@ spec:
+   ports:
+     # the port that this service should serve on
+   - port: 5672
++    name: rabbitmq
+     targetPort: 5672
++  - name: epmd
++    port: 4369
++    targetPort: 4369
++  - name: dist
++    port: 25672
++    targetPort: 25672
++  - name: management
++    port: 15672
++    targetPort: 15672
++  - port: 9090
++    name: exporter
++    targetPort: exporter
++    protocol: TCP
+   selector:
+     name: rabbitmq
+ ---

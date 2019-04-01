@@ -2,7 +2,7 @@
 set -x
 source ./vars.sh
 gcloud container clusters create cluster-1 --zone $zone --username "admin" \
---cluster-version "1.12.5-gke.10" --machine-type "n1-standard-2" --image-type "COS" --disk-size "50" \
+--cluster-version "1.11.7-gke.12" --machine-type "n1-standard-2" --image-type "COS" --disk-size "50" \
 --scopes "https://www.googleapis.com/auth/compute","https://www.googleapis.com/auth/devstorage.read_only",\
 "https://www.googleapis.com/auth/logging.write","https://www.googleapis.com/auth/monitoring",\
 "https://www.googleapis.com/auth/servicecontrol","https://www.googleapis.com/auth/service.management.readonly",\
@@ -11,7 +11,7 @@ gcloud container clusters create cluster-1 --zone $zone --username "admin" \
 
 
 gcloud container clusters create cluster-2 --zone $zone2 --username "admin" \
---cluster-version "1.12.5-gke.10" --machine-type "n1-standard-2" --image-type "COS" --disk-size "50" \
+--cluster-version "1.11.7-gke.12" --machine-type "n1-standard-2" --image-type "COS" --disk-size "50" \
 --scopes "https://www.googleapis.com/auth/compute","https://www.googleapis.com/auth/devstorage.read_only",\
 "https://www.googleapis.com/auth/logging.write","https://www.googleapis.com/auth/monitoring",\
 "https://www.googleapis.com/auth/servicecontrol","https://www.googleapis.com/auth/service.management.readonly",\

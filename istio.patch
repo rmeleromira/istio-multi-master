@@ -1,0 +1,22 @@
+apiVersion: "authentication.istio.io/v1alpha1"
+kind: "Policy"
+metadata:
+  name: mysql-mtls-authn
+  namespace: sock-shop
+spec:
+  targets:
+  - name: catalogue-db
+  peers:
+  - mtls:
+      mode: STRICT
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: mysql-mtls-dr
+  namespace: sock-shop
+spec:
+  host: "catalogue-db"
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL

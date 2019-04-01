@@ -1,5 +1,13 @@
 #!/bin/bash 
-kubectl delete -f <(istioctl kube-inject -f app/Deployment.yaml)
-kubectl delete -f <(istioctl kube-inject -f app/Service.yaml)
-kubectl delete -f <(istioctl kube-inject -f app/ConfigMap.yaml)
-kubectl delete -f <(istioctl kube-inject -f app/Ingress.yaml)
+set -x
+source ./vars.sh
+
+cd microservices-demo
+
+kubectl config use-context $context
+kubectl delete -n sock-shop -f deploy/kubernetes/complete-demo.yaml
+kubectl delete namespace sock-shop
+
+kubectl config use-context $context2
+kubectl delete -n sock-shop -f deploy/kubernetes/complete-demo.yaml
+kubectl delete namespace sock-shop

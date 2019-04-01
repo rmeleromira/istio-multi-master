@@ -1,0 +1,22 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: catalogue-db
+  namespace: sock-shop
+spec:
+  hosts:
+  - catalogue-db-2.sock-shop.global
+  location: MESH_INTERNAL
+  ports:
+  - name: http
+    number: 80
+    protocol: http
+  resolution: DNS
+  addresses:
+  - 127.255.0.3
+  endpoints:
+  - address: ${CLUSTER2_GW_ADDR}
+    labels:
+      cluster: cluster2
+    ports:
+      http: 15443

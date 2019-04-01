@@ -38,7 +38,14 @@ This exercise will put start a pod that will put a load on the web app and simul
 
 This exercise will test whether https is being used for inter-service communication.
 
+# Google Cloud setup
+
+Create google cloud account 
+
+Navigate to Google Kubernetes engine and click on the blue enable billing button.
+
 # Instructions
+
 
 1. Clone repo and move into directory
 ```
@@ -51,12 +58,19 @@ cd istio-multi-master
 ./provision.sh
 ```
 
-3. Run Istio install script
+3. Login to Google Cloud and AWS CLI tools
+```
+gloud init
+awscli configure
+```
+
+
+4. Run Istio install script
 ```
 ./install-istio.sh
 ```
 
-4. Install example applications
+5. Install sock-shop
 ```
 ./install-app.sh
 ```
@@ -110,3 +124,11 @@ Remove test application
 Decommissions the kubernetes clusters 
 
 # Port forwards
+
+
+# Patches
+
+1. microservice-demo (sock-shop) Rabbitmq could not connect to it's port because the connections get intercepted by istio sidecar and don't make it back. This is fixed by specifying the ports explicitly. Covered in microservices-demo.patch
+
+2. One of the node ports (30001) used by sock-shop is also used by Istio, so we changed this port in sock-shop.  Covered in microservices-demo.patch
+
